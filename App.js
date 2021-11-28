@@ -14,8 +14,8 @@ export default class App extends Component {
       <Stack.Navigator initialRouteName='AuthenticationScreen' screenOptions={{headerShown:
          false,}}>
       <Stack.Screen name="AuthenticationScreen" component={AuthenticationScreen} />
-        {/* <Stack.Screen name="SignIn" component={SignInScreen} /> */}
-        {/* <Stack.Screen name="SignUp" component={SignUpScreen} /> */}
+        <Stack.Screen name="SignIn" component={SignInScreen} />
+        <Stack.Screen name="SignUp" component={AuthenticationScreen} />
       </Stack.Navigator>
     </NavigationContainer>
     )

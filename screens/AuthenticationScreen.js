@@ -1,12 +1,13 @@
 import React from 'react'
-import { View, StyleSheet, TouchableOpacity, Text, Image, Button } from 'react-native'
+import { View, StyleSheet, Text, Image, Button } from 'react-native'
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import 'react-native-gesture-handler';
 import ButtonComponent from '../components/ButtonComponent';
 import GoogleSign from '../components/GoogleSign';
-import Carousel from '../components/Carousel'
-import { dummyData } from '../data/Data'
+// import Carousel from '../components/Carousel'
+// import { dummyData } from '../data/Data'
 
-const AuthenticationScreen = () => {
+const AuthenticationScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
 
@@ -18,16 +19,16 @@ const AuthenticationScreen = () => {
       </View>
 
 
-      <View >
+      {/* <View >
         <Carousel data={dummyData} />
-      </View>
+      </View> */}
 
       <View style={styles.buttons}>
         <ButtonComponent text='Join Now' />
         <GoogleSign text='Sign up With Google' />
-        <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+        <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
           <Text style={{ fontWeight: 'bold',textAlign:'center',fontSize:18,marginTop:20,color:'#0984e3' }}>
-            Sign up
+            Sign In
           </Text>
         </TouchableOpacity>
 

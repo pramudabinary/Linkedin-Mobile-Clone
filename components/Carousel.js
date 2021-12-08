@@ -4,7 +4,6 @@ import CarouselItem from '../components/CarouselItem'
 
 
 const { width, heigth } = Dimensions.get('window')
-let flatList
 
 function infiniteScroll(dataList){
     const numberOfData = dataList.length
@@ -20,7 +19,7 @@ function infiniteScroll(dataList){
             scrolled = 0
         }
         
-        this.flatList.scrollToOffset({ animated: true, offset: scrollValue})
+       let flatList = this.flatList.scrollToOffset({ animated: true, offset: scrollValue})
         
     }, 3000)
 }

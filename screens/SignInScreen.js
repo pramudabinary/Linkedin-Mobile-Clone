@@ -1,13 +1,42 @@
-import React, { useState } from "react";
+import React, { Component} from "react";
 import { View, Image, Text, StyleSheet } from 'react-native'
 import {TextField} from 'react-native-material-textfield';
 import CheckBox from '@react-native-community/checkbox';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ButtonComponent from "../components/ButtonComponent";
 import GoogleSign from "../components/GoogleSign";
-const SignInScreen = ({navigation}) => {
-  const [isSelected, setSelection] = useState(false);
+import auth from '@react-native-firebase/auth';
 
+export default class App extends Component {
+  constructor(props){
+      super();
+      this.state={
+        email:'',
+        password:''
+      };
+  }
+
+  registerUser = () => {
+    auth()
+  .createUserWithEmailAndPassword(this.state.email, this.state.password)
+  .then(() => {
+    console.log('User account created & signed in!');
+  })
+  .catch(error => {
+    if (error.code === 'auth/email-already-in-use') {
+      console.log('That email address is already in use!');
+    }
+
+    if (error.code === 'auth/invalid-email') {
+      console.log('That email address is invalid!');
+    }
+
+    console.error(error);
+  });
+  }
+
+render(){
+  const { navigation,isSelected,setSelection } = this.props;
   return (
     <View style={styles.container}>
       <View style={styles.imageL} >
@@ -23,11 +52,19 @@ const SignInScreen = ({navigation}) => {
         <TextField
           label='Email or Phone'
           keyboardType='email-address'
+          value={this.state.email}
+          onChangeText={text => this.setState(
+            {email:text}
+          ) }
         />
         <TextField
           label='Password'
           keyboardType='ascii-capable'
           secureTextEntry={true}
+          value={this.state.password}
+          onChangeText={text => this.setState(
+            {password:text}
+          ) }
         />
 
         <View style={styles.checkboxContainer}>
@@ -49,11 +86,11 @@ const SignInScreen = ({navigation}) => {
       </View>
 
       <View style={styles.buttons}>
-        <ButtonComponent text='Continue' />
+        <ButtonComponent onPress={this.props.registerUser} text='Continue' />
         <GoogleSign text='Sign in With Google' />
         <GoogleSign text='Sign in With Facebook' />
         <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-          <Text style={{ fontWeight: 'bold',textAlign:'center',fontSize:18,marginTop:10,color:'#0984e3' }}>
+          <Text style={{ fontWeight: 'bold',textAlign:'center',fontSize:18,marginTop:20,color:'#0984e3' }}>
             Sign Up
           </Text>
         </TouchableOpacity>
@@ -66,7 +103,7 @@ const SignInScreen = ({navigation}) => {
 
     </View>
   )
-}
+}}
 
 const styles = StyleSheet.create({
   container: {
@@ -106,5 +143,3 @@ const styles = StyleSheet.create({
   }
 })
 
-
-export default SignInScreen

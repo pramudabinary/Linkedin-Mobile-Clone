@@ -4,8 +4,8 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import 'react-native-gesture-handler';
 import ButtonComponent from '../components/ButtonComponent';
 import GoogleSign from '../components/GoogleSign';
-// import Carousel from '../components/Carousel'
-// import { dummyData } from '../data/Data'
+import Carousel from '../components/Carousel'
+import { dummyData } from '../data/Data'
 
 const AuthenticationScreen = ({navigation}) => {
   return (
@@ -19,9 +19,9 @@ const AuthenticationScreen = ({navigation}) => {
       </View>
 
 
-      {/* <View >
+      <View >
         <Carousel data={dummyData} />
-      </View> */}
+      </View>
 
       <View style={styles.buttons}>
         <ButtonComponent text='Join Now' />

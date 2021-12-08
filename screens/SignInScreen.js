@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { View, Image, Text, StyleSheet } from 'react-native'
-import {
-  TextField
-} from 'react-native-material-textfield';
+import {TextField} from 'react-native-material-textfield';
 import CheckBox from '@react-native-community/checkbox';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ButtonComponent from "../components/ButtonComponent";
@@ -38,7 +36,7 @@ const SignInScreen = ({navigation}) => {
             onValueChange={setSelection}
             style={styles.checkbox}
           />
-          <Text style={styles.label}>Remember Me</Text>
+          <Text style={styles.label}>Remember me.</Text>
         </View>
 
 
@@ -51,7 +49,7 @@ const SignInScreen = ({navigation}) => {
       </View>
 
       <View style={styles.buttons}>
-        <ButtonComponent text='Join Now' />
+        <ButtonComponent text='Continue' />
         <GoogleSign text='Sign in With Google' />
         <GoogleSign text='Sign in With Facebook' />
         <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>

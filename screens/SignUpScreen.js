@@ -5,6 +5,12 @@ import { TextField } from 'react-native-material-textfield';
 import ButtonComponent from "../components/ButtonComponent";
 import auth from '@react-native-firebase/auth';
 import GoogleSign from '../components/GoogleSign';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+
+
+GoogleSignin.configure({
+    webClientId: '440267365420-o8eh4fl790mg0l4p5shqqlsco5lasedb.apps.googleusercontent.com',
+});
 
 
 export default class SignUpScreen extends Component {
@@ -42,6 +48,17 @@ export default class SignUpScreen extends Component {
 
                 console.error(error);
             });
+    }
+
+    onGoogleAuth = async () => {
+
+        const { idToken } = await GoogleSignin.signIn();
+
+        const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+        return auth().signInWithCredential(googleCredential);
+
+
     }
 
     render() {
@@ -107,7 +124,7 @@ export default class SignUpScreen extends Component {
 
                     <View style={styles.buttons}>
                         <ButtonComponent onPress={this.registerUser} text='SignUp' />
-                        <GoogleSign text='Sign up With Google' />
+                        <GoogleSign onPress={this.onGoogleAuth} text='Sign up With Google' />
                         <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
                             <Text style={{ fontWeight: 'bold', textAlign: 'center', fontSize: 18, marginTop: 20, color: '#0984e3' }}>
                                 Sign In

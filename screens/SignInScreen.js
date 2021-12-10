@@ -4,8 +4,14 @@ import { TextField } from 'react-native-material-textfield';
 import CheckBox from '@react-native-community/checkbox';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ButtonComponent from "../components/ButtonComponent";
-import GoogleSign from "../components/GoogleSign";
+import SocialButton from "../components/SocialButton";
 import auth from '@react-native-firebase/auth';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+// import { LoginManager,Settings, AccessToken } from 'react-native-fbsdk-next';
+
+GoogleSignin.configure({
+  webClientId: '440267365420-o8eh4fl790mg0l4p5shqqlsco5lasedb.apps.googleusercontent.com',
+});
 
 export default class App extends Component {
   constructor(props) {
@@ -35,6 +41,38 @@ export default class App extends Component {
         console.error(error);
       });
   }
+
+  onGoogleAuth = async () => {
+
+    const { idToken } = await GoogleSignin.signIn();
+
+    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+    return auth().signInWithCredential(googleCredential);
+
+
+}
+
+ 
+onFacebookAuth = async () => {
+
+  const result = await LoginManager.logInWithPermissions(['public_profile', 'email']);
+
+  if (result.isCancelled) {
+    throw 'User cancelled the login process';
+  }
+
+  const data = await AccessToken.getCurrentAccessToken();
+
+  if (!data) {
+    throw 'Something went wrong obtaining access token';
+  }
+
+  const facebookCredential = auth.FacebookAuthProvider.credential(data.accessToken);
+
+  return auth().signInWithCredential(facebookCredential);
+
+}
 
   render() {
     const { navigation, isSelected, setSelection } = this.props;
@@ -88,8 +126,8 @@ export default class App extends Component {
 
         <View style={styles.buttons}>
           <ButtonComponent onPress={this.signinUser} text='Continue' />
-          <GoogleSign text='Sign in With Google' />
-          <GoogleSign text='Sign in With Facebook' />
+          <SocialButton onPress={this.onGoogleAuth} text='Sign in With Google' />
+          <SocialButton onPress={this.onFacebookAuth} text='Sign in With Facebook' />
           <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
             <Text style={{ fontWeight: 'bold', textAlign: 'center', fontSize: 18, marginTop: 20, color: '#0984e3' }}>
               Sign Up

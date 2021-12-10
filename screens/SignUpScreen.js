@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { TextField } from 'react-native-material-textfield';
 import ButtonComponent from "../components/ButtonComponent";
 import auth from '@react-native-firebase/auth';
-import GoogleSign from '../components/GoogleSign';
+import SocialButton from '../components/SocialButton';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 
@@ -124,7 +124,7 @@ export default class SignUpScreen extends Component {
 
                     <View style={styles.buttons}>
                         <ButtonComponent onPress={this.registerUser} text='SignUp' />
-                        <GoogleSign onPress={this.onGoogleAuth} text='Sign up With Google' />
+                        <SocialButton onPress={this.onGoogleAuth} text='Sign up With Google' />
                         <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
                             <Text style={{ fontWeight: 'bold', textAlign: 'center', fontSize: 18, marginTop: 20, color: '#0984e3' }}>
                                 Sign In

@@ -1,16 +1,15 @@
 import React from 'react'
 import { StyleSheet,View, Text,TouchableOpacity } from 'react-native'
 
-const GoogleSign = ({text,onPress}) => {
+const Socialbutton = ({onPress,text}) => {
     return (
         <TouchableOpacity onPress={onPress}>
-            <View style={styles.button}>
-                <Text style={styles.buttonText}>{ text }</Text>
-            </View>
-        </TouchableOpacity>
+        <View style={styles.button}>
+            <Text style={styles.buttonText}>{ text }</Text>
+        </View>
+    </TouchableOpacity>
     )
 }
-
 
 const styles = StyleSheet.create({
     button:{
@@ -30,4 +29,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default GoogleSign
+export default Socialbutton

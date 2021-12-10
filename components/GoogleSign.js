@@ -3,7 +3,7 @@ import { StyleSheet,View, Text,TouchableOpacity } from 'react-native'
 
 const GoogleSign = ({text,onPress}) => {
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onpress={onPress}>
             <View style={styles.button}>
                 <Text style={styles.buttonText}>{ text }</Text>
             </View>

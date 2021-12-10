@@ -16,11 +16,12 @@ export default class App extends Component {
       };
   }
 
-  registerUser = () => {
+  signinUser = () => {
     auth()
-  .createUserWithEmailAndPassword(this.state.email, this.state.password)
+  .signInWithEmailAndPassword(this.state.email, this.state.password)
   .then(() => {
-    console.log('User account created & signed in!');
+    console.log('signed in!');
+    this.props.navigation.navigate('Home')
   })
   .catch(error => {
     if (error.code === 'auth/email-already-in-use') {
@@ -86,7 +87,7 @@ render(){
       </View>
 
       <View style={styles.buttons}>
-        <ButtonComponent onPress={this.props.registerUser} text='Continue' />
+        <ButtonComponent onPress={this.signinUser} text='Continue' />
         <GoogleSign text='Sign in With Google' />
         <GoogleSign text='Sign in With Facebook' />
         <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>

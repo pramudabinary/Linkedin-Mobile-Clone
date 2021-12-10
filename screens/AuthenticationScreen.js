@@ -6,8 +6,15 @@ import ButtonComponent from '../components/ButtonComponent';
 import GoogleSign from '../components/GoogleSign';
 // import Carousel from '../components/Carousel'
 // import { dummyData } from '../data/Data'
+// import { GoogleSignin } from '@react-native-google-signin/google-signin';
+
+
+// GoogleSignin.configure({
+//   webClientId: '440267365420-o8eh4fl790mg0l4p5shqqlsco5lasedb.apps.googleusercontent.com',
+// });
 
 export default class App extends Component {
+  
   render() {
     const { navigation } = this.props;
     return (

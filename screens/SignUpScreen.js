@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, Image, KeyboardAvoidingView } from 'react-native'
-import { TextField } from 'react-native-material-textfield';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TextField  } from 'react-native-material-textfield';
 import ButtonComponent from "../components/ButtonComponent";
 import auth from '@react-native-firebase/auth';
 import GoogleSign from '../components/GoogleSign';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import { AsyncStorage } from 'react-native';
-
 
 
 export default class SignUpScreen extends Component {

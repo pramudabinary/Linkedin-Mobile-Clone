@@ -1,6 +1,6 @@
 import React, { Component} from "react";
 import { View, Image, Text, StyleSheet } from 'react-native'
-import {TextField} from 'react-native-material-textfield';
+import { TextField } from 'react-native-material-textfield';
 import CheckBox from '@react-native-community/checkbox';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ButtonComponent from "../components/ButtonComponent";

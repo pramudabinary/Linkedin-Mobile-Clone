@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, Image, KeyboardAvoidingView } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { TextField  } from 'react-native-material-textfield';
+import { TextField } from 'react-native-material-textfield';
 import ButtonComponent from "../components/ButtonComponent";
 import auth from '@react-native-firebase/auth';
 import GoogleSign from '../components/GoogleSign';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 
 export default class SignUpScreen extends Component {
@@ -13,6 +12,8 @@ export default class SignUpScreen extends Component {
     constructor(props) {
         super();
         this.state = {
+            displayName: '',
+            address: '',
             email: '',
             password: ''
         };
@@ -25,10 +26,22 @@ export default class SignUpScreen extends Component {
             createUserWithEmailAndPassword(this.state.email, this.state.password)
             .then((createdUser) => {
                 createdUser.user.updateProfile({
-                    displayName: this.state.displayName
-
+                    displayName: this.state.displayName,
+                    address: this.state.address
                 })
+                console.log('user account created!!')
             })
+            .catch(error => {
+                if (error.code === 'auth/email-already-in-use') {
+                    console.log('That email address is already in use!');
+                }
+
+                if (error.code === 'auth/invalid-email') {
+                    console.log('That email address is invalid!');
+                }
+
+                console.error(error);
+            });
     }
 
     render() {
@@ -59,6 +72,14 @@ export default class SignUpScreen extends Component {
                             )}
                         />
 
+                        <TextField
+                            label='Address'
+                            keyboardType='default'
+                            value={this.state.address}
+                            onChangeText={text => this.setState(
+                                { address: text }
+                            )}
+                        />
 
                         <TextField
                             label='Email'
@@ -87,7 +108,6 @@ export default class SignUpScreen extends Component {
                     <View style={styles.buttons}>
                         <ButtonComponent onPress={this.registerUser} text='SignUp' />
                         <GoogleSign text='Sign up With Google' />
-                        <GoogleSign text='Sign up With FaceBook' />
                         <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
                             <Text style={{ fontWeight: 'bold', textAlign: 'center', fontSize: 18, marginTop: 20, color: '#0984e3' }}>
                                 Sign In

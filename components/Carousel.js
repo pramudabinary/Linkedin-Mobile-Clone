@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { View, StyleSheet, FlatList ,Dimensions, Animated } from 'react-native'
 import CarouselItem from '../components/CarouselItem'
+import { Avatar, Surface } from "react-native-paper";
 
 
 const { width, heigth } = Dimensions.get('window')
+let flatList
 
 function infiniteScroll(dataList){
     const numberOfData = dataList.length
@@ -19,7 +21,7 @@ function infiniteScroll(dataList){
             scrolled = 0
         }
         
-       let flatList = this.flatList.scrollToOffset({ animated: true, offset: scrollValue})
+       this.FlatList.scrollToOffset({ animated: true, offset: scrollValue})
         
     }, 3000)
 }

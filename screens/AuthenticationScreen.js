@@ -39,10 +39,15 @@ export default class App extends Component {
           />
         </View>
 
-        {/* 
-      <View >
+
+        {/* <View >
         <Carousel data={dummyData} />
       </View> */}
+
+        <Image
+          style={styles.stretch}
+          source={require('../assets/B.jpg')}
+        />
 
         <View style={styles.buttons}>
           <ButtonComponent onPress={() => navigation.navigate('SignUp2')} text='Join Now' />
@@ -70,6 +75,12 @@ const styles = StyleSheet.create({
   imageL: {
     width: 20,
     height: 20,
+  },
+  stretch: {
+    marginTop:80,
+    width:320,
+    height: 220,
+    resizeMode: 'stretch'
   },
   tinyLogo: {
     width: 130,

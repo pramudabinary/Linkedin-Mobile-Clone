@@ -11,7 +11,11 @@ const Tab = createBottomTabNavigator();
 
 const TabComponent = () => {
     return (
-        <Tab.Navigator>
+        <Tab.Navigator
+        tabBarOptions={{
+            showLabel:false
+        }}
+        >
 
             <Tab.Screen name="Home" component={HomeScreen} />
             <Tab.Screen name="Connect" component={ConnectScreen} />

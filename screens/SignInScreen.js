@@ -48,6 +48,8 @@ export default class App extends Component {
 
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
+    // this.props.navigation.navigate('Home')
+
     return auth().signInWithCredential(googleCredential);
 
 

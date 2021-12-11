@@ -6,7 +6,7 @@ import ButtonComponent from "../components/ButtonComponent";
 import auth from '@react-native-firebase/auth';
 import SocialButton from '../components/SocialButton';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
-
+import firestore from '@react-native-firebase/firestore';
 
 GoogleSignin.configure({
     webClientId: '440267365420-o8eh4fl790mg0l4p5shqqlsco5lasedb.apps.googleusercontent.com',
@@ -18,11 +18,22 @@ export default class SignUpScreen extends Component {
     constructor(props) {
         super();
         this.state = {
-            displayName: '',
+            name: '',
             address: '',
             email: '',
             password: ''
         };
+
+
+        // const subscriber = firestore()
+        // .collection('customers')
+        // .doc('AcgMbEDHBxy2zxfIJosy')
+        // .onSnapshot(documentSnapshot => {
+        //     console.log('User data: ', documentSnapshot.data().name);
+        //     this.setState({
+        //         name: documentSnapshot.data().name
+        //     })
+        // });
     }
 
 
@@ -36,6 +47,12 @@ export default class SignUpScreen extends Component {
                     address: this.state.address
                 })
                 console.log('user account created!!')
+                this.setState({
+                    name: '',
+                    address: '',
+                    email:'',
+                    password: ''
+                })
             })
             .catch(error => {
                 if (error.code === 'auth/email-already-in-use') {
@@ -48,6 +65,29 @@ export default class SignUpScreen extends Component {
 
                 console.error(error);
             });
+
+        firestore()
+        .collection('users')
+        .add({
+            name: this.state.name,
+            address: this.state.address,
+            email: this.state.email,
+            password: this.state.password,
+        })
+        .then(() => {
+            console.log('User added!');
+            this.setState({
+                name: '',
+                address: '',
+                email: '',
+                password:''
+            })
+        });
+        
+    }
+
+    saveCustomer = () => {
+       
     }
 
     onGoogleAuth = async () => {

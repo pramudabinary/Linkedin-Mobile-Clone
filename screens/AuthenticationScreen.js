@@ -77,8 +77,8 @@ const styles = StyleSheet.create({
     height: 20,
   },
   stretch: {
-    marginTop:80,
-    width:320,
+    marginTop: 80,
+    width: 320,
     height: 220,
     resizeMode: 'stretch'
   },
